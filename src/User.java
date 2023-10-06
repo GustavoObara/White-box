@@ -20,7 +20,7 @@ public class User {
         // INSTRUÇÃO SQL
         sql += "select nome from usuarios ";
         sql += "where login = " + "'" + login + "'";
-        sql += " and senha = " + "'" + senha + "'";/*8*/
+        sql += " and senha = " + "'" + senha + "'"; /*8*/
         /*9*/try{
             /*9*/Statement st = conn.createStatement();
             /*9*/ResultSet rs = st.executeQuery(sql);
