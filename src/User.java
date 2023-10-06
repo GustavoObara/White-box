@@ -2,7 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
+// Notação Grafo de Fluxo
 public class User {
     /*3*/public Connection conectarBD() {
         /*4*/Connection conn = null;
