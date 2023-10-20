@@ -2,31 +2,46 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-// Notação Grafo de Fluxo
+/**
+ * Classe que representa um usuário e fornece métodos para conexão ao banco de dados
+ * e verificação de credenciais de login.
+ */
 public class User {
-    /*3*/public Connection conectarBD() {
-        /*4*/Connection conn = null;
-        /*5*/try{
-            /*5*/Class.forName("com.mysql.Driver.Manager").newInstance();
-            /*5*/String url = "jdbc:mysql://127.0.0.1/test?user=lopes&password=123";
-            /*5*/conn = DriverManager.getConnection(url);
-        }/*7*/catch (Exception e) { }
-        /*6*/return conn; }
+    /**
+     * Método para conectar ao banco de dados.
+     *
+     * @return Uma conexão com o banco de dados, ou null em caso de falha na conexão.
+     */
+    public Connection conectarBD() {
+        Connection conn = null;
+        try{
+            Class.forName("com.mysql.Driver.Manager").newInstance();
+            String url = "jdbc:mysql://127.0.0.1/test?user=lopes&password=123";
+            conn = DriverManager.getConnection(url);
+        } catch (Exception e) { }
+        return conn; }
     public String nome="";
     public boolean result = false;
+    /**
+     * Método para verificar as credenciais do usuário.
+     *
+     * @param login O nome de usuário a ser verificado.
+     * @param senha A senha do usuário a ser verificada.
+     * @return true se as credenciais forem válidas, false caso contrário.
+     */
     public boolean verificarUsuario(String login, String senha) {
-        /*1*/String sql = "";
-        /*2*/Connection conn = conectarBD();
+        String sql = "";
+        Connection conn = conectarBD();
         // INSTRUÇÃO SQL
         sql += "select nome from usuarios ";
         sql += "where login = " + "'" + login + "'";
         sql += " and senha = " + "'" + senha + "'"; /*8*/
-        /*9*/try{
-            /*9*/Statement st = conn.createStatement();
-            /*9*/ResultSet rs = st.executeQuery(sql);
-            /*10*/if (rs.next()) {
-                /*11*/result = true;
-                /*11*/nome = rs.getString("nome"); }
-        } /*12*/catch (Exception e) { }
-        /*13*/return result;}
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                result = true;
+                nome = rs.getString("nome"); }
+        } catch (Exception e) { }
+        return result;}
 }
